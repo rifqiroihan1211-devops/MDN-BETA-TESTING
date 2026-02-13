@@ -1,0 +1,210 @@
+/* MDN Website - Compact & Smooth Version */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #0c5aa6;
+    --primary-dark: #08427b;
+    --accent: #2ecc71;
+    --dark: #0f172a;
+    --light: #f1f5f9;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Font lebih modern & compact */
+    color: var(--text-main);
+    line-height: 1.6;
+    background-color: #fff;
+    font-size: 15px; /* Base font sedikit lebih kecil */
+}
+
+/* --- Navbar Compact --- */
+.navbar {
+    position: fixed;
+    top: 0; width: 100%;
+    padding: 0.8rem 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.navbar.scrolled { padding: 0.5rem 0; box-shadow: var(--shadow-card); background: rgba(255, 255, 255, 0.98); }
+.nav-container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+
+.nav-logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 1.2rem; }
+.nav-logo img { height: 35px; width: auto; } /* Logo lebih proporsional */
+
+.nav-menu { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+.nav-link { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.9rem; transition: 0.3s; position: relative; }
+.nav-link:hover { color: var(--primary); }
+
+.nav-cta {
+    padding: 0.5rem 1.2rem;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 6px; /* Sudut lebih kotak dikit (modern) */
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.3s;
+    text-decoration: none;
+}
+.nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+/* --- Hero Section (Lebih Pendek & Cinematic) --- */
+.hero-section {
+    position: relative;
+    height: 85vh; /* Tidak full 100vh agar user lihat konten bawah */
+    min-height: 500px;
+    max-height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    opacity: 0; transform: scale(1.1); /* Mulai agak zoom */
+    transition: opacity 1s ease, transform 8s linear; /* Efek Ken Burns */
+    z-index: 1;
+}
+
+.hero-slide.active { opacity: 1; transform: scale(1); } /* Zoom out perlahan */
+
+.hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(12, 90, 166, 0.8) 100%);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative; z-index: 3; text-align: center; color: #fff;
+    max-width: 700px; padding: 2rem;
+}
+
+/* Animasi Teks Hero: Slide Up Smooth */
+.hero-content h1 {
+    font-size: 2.8rem; /* Tidak terlalu raksasa */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    opacity: 0; transform: translateY(30px);
+    animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 2rem;
+    opacity: 0; transform: translateY(20px);
+    animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
+}
+
+.hero-cta {
+    display: inline-block; padding: 0.8rem 2rem;
+    background: #fff; color: var(--primary);
+    border-radius: 50px; font-weight: 600; text-decoration: none;
+    opacity: 0; transform: translateY(20px);
+    animation: slideUpFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards;
+    transition: 0.3s;
+}
+.hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+/* --- Sections General --- */
+section { padding: 4rem 0; } /* Padding atas bawah dikurangi dari 100px ke 4rem (~64px) */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+.section-title { text-align: center; margin-bottom: 3rem; }
+.section-title h2 {
+    font-size: 2rem; /* Diperkecil dari 2.5rem */
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    position: relative; display: inline-block;
+}
+.section-title p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- Services & Features Grid (Compact Cards) --- */
+.services-grid, .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem; /* Gap diperkecil */
+}
+
+.service-card {
+    background: #fff; padding: 2rem; /* Padding dalam dikurangi */
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+    opacity: 0; transform: translateY(30px); /* Untuk animasi JS */
+}
+
+.service-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.service-icon {
+    width: 50px; height: 50px; /* Icon lebih kecil */
+    background: rgba(12, 90, 166, 0.1); color: var(--primary);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; margin-bottom: 1.2rem;
+    transition: 0.3s;
+}
+.service-card:hover .service-icon { background: var(--primary); color: #fff; transform: rotate(-5deg); }
+
+.service-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--dark); }
+.service-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+/* --- Why MDN (Compact Layout) --- */
+.why-mdn-section { background: var(--dark); color: #fff; padding: 5rem 0; }
+.why-mdn-content { display: flex; align-items: center; gap: 3rem; }
+.why-mdn-text h2 { font-size: 2rem; margin-bottom: 1rem; }
+.why-mdn-text p { color: #94a3b8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+.why-mdn-image img { width: 100%; border-radius: 12px; transform: perspective(1000px) rotateY(-5deg); transition: 0.5s; }
+.why-mdn-image:hover img { transform: perspective(1000px) rotateY(0deg); }
+
+/* --- Footer --- */
+.footer { background: #020617; padding: 3rem 0 1.5rem; font-size: 0.9rem; color: #94a3b8; }
+.footer h4 { color: #fff; font-size: 1.1rem; margin-bottom: 1.2rem; }
+.footer a { color: #94a3b8; display: block; margin-bottom: 0.6rem; text-decoration: none; transition: 0.2s; }
+.footer a:hover { color: var(--primary); padding-left: 5px; }
+
+/* --- Animations Utility --- */
+@keyframes slideUpFade {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Class untuk JS Trigger */
+.fade-in-up { opacity: 0; transform: translateY(40px); transition: all 0.6s ease-out; }
+.fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+/* Mobile */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2rem; }
+    .hero-section { height: auto; min-height: 100vh; padding: 100px 0; }
+    .why-mdn-content { flex-direction: column-reverse; }
+    .why-mdn-image img { transform: none; }
+    
+    .nav-menu {
+        position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+        background: #fff; flex-direction: column; padding: 5rem 2rem;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-menu.active { right: 0; }
+    
+    .burger { display: block; position: relative; z-index: 1001; cursor: pointer; }
+    .burger div { width: 25px; height: 2px; background: var(--dark); margin: 6px 0; transition: 0.3s; }
+    .burger.active div:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .burger.active div:nth-child(2) { opacity: 0; }
+    .burger.active div:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+}
