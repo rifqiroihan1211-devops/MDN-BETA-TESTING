@@ -1,0 +1,280 @@
+================================================================================
+MDN - MASJID DIGITAL NETWORK
+PANDUAN INSTALASI ADMIN SYSTEM
+================================================================================
+
+📋 APA YANG SUDAH DIBUAT:
+================================================================================
+
+1. DATABASE SCHEMA (database.sql)
+   ✅ 12+ tabel lengkap dengan relasi
+   ✅ Default data (2 admin, settings, sliders, services, offices)
+   ✅ Views, stored procedures, dan triggers
+   ✅ Security & indexing sudah dioptimasi
+
+2. ADMIN DASHBOARD LENGKAP
+   ✅ Login system dengan session management
+   ✅ Dashboard dengan statistik real-time
+   ✅ Sidebar navigation responsive
+   ✅ Profile dropdown & logout
+   ✅ Modern CSS dengan CSS variables
+   ✅ JavaScript interaktif
+
+3. MANAJEMEN KONTEN
+   ✅ Slider Management (untuk Hero, About, Features, Contact)
+   ✅ Hero Section Settings (teks, angka statistik)
+   ✅ About Settings (visi, misi, deskripsi)
+   ✅ Features Management
+   ✅ Contact & Social Media Settings
+   ✅ Service Management (layanan bisa ditambah admin)
+   ✅ Office Management (2 kantor: pusat & cabang)
+   ✅ Gallery Management
+   ✅ FAQ Management
+   ✅ Contact Messages Inbox
+
+4. ADMIN MANAGEMENT (Super Admin Only)
+   ✅ Add/Edit/Delete admin
+   ✅ Role management (Super Admin / Admin)
+   ✅ Activity logs tracking
+   ✅ Last login monitoring
+
+5. KEAMANAN
+   ✅ Password hashing (bcrypt)
+   ✅ CSRF protection
+   ✅ SQL injection prevention (PDO prepared statements)
+   ✅ XSS protection (clean_input function)
+   ✅ Session security
+   ✅ Activity logging dengan IP & User Agent
+
+================================================================================
+🚀 CARA INSTALASI:
+================================================================================
+
+STEP 1: PERSIAPAN
+-----------------
+- Pastikan server PHP 7.4+ dan MySQL 5.7+
+- Extension PHP yang dibutuhkan: PDO, GD, mbstring, json
+- Apache/Nginx dengan mod_rewrite
+
+STEP 2: UPLOAD FILES
+--------------------
+1. Extract semua file dari mdn-admin-complete.zip
+2. Upload ke root directory website (public_html / htdocs)
+3. Struktur folder harus seperti ini:
+   
+   /
+   ├── admin/           <- Folder admin dashboard
+   ├── css/             <- CSS landing page
+   ├── js/              <- JS landing page
+   ├── uploads/         <- Folder upload (PENTING: set permission 755)
+   ├── config.php       <- Konfigurasi database
+   ├── database.sql     <- Import ke database
+   ├── index.php        <- Landing page
+   └── README.md        <- Dokumentasi lengkap
+
+STEP 3: BUAT DATABASE
+---------------------
+1. Buka cPanel > MySQL Databases (atau phpMyAdmin)
+2. Buat database baru: apaco318_MDN
+3. Buat user database (atau gunakan existing)
+4. Import database.sql ke database yang baru dibuat
+
+   Via phpMyAdmin:
+   - Pilih database apaco318_MDN
+   - Tab "Import"
+   - Choose file: database.sql
+   - Klik "Go"
+
+   Via Terminal/SSH:
+   mysql -u username -p apaco318_MDN < database.sql
+
+STEP 4: KONFIGURASI
+-------------------
+Edit file config.php di root directory:
+
+define('DB_HOST', 'localhost');        <- Host database
+define('DB_NAME', 'apaco318_MDN');     <- Nama database
+define('DB_USER', 'apaco318_admin');   <- Username database  
+define('DB_PASS', 'password_anda');    <- Password database
+
+define('BASE_URL', 'http://yourdomain.com/');     <- URL website
+define('ADMIN_URL', BASE_URL . 'admin/');          <- URL admin
+
+STEP 5: SET PERMISSIONS
+-----------------------
+Jalankan command ini via SSH atau File Manager:
+
+chmod 755 uploads/
+chmod 755 uploads/sliders/
+chmod 755 uploads/services/
+chmod 755 uploads/offices/
+chmod 755 uploads/admins/
+chmod 755 uploads/gallery/
+
+STEP 6: TEST LOGIN
+------------------
+Buka browser dan akses:
+http://yourdomain.com/admin/login.php
+
+Login dengan:
+Username: superadmin
+Password: admin123
+
+⚠️ SEGERA GANTI PASSWORD setelah login pertama!
+
+================================================================================
+📱 FITUR-FITUR UTAMA:
+================================================================================
+
+UNTUK SUPER ADMIN:
+- ✅ Full access ke semua fitur
+- ✅ Kelola landing page (Hero, About, Features, Contact)
+- ✅ Kelola slider gambar (Hero, About, Features, Contact)
+  ⚠️ NOTE: Slider TIDAK ditampilkan di section Layanan
+- ✅ Tambah/edit/hapus admin lain
+- ✅ Lihat activity logs semua admin
+- ✅ Kelola layanan, kantor, gallery, FAQ
+
+UNTUK ADMIN BIASA:
+- ✅ Dashboard & statistik
+- ✅ Kelola layanan (tambah/edit/hapus)
+- ✅ Kelola kantor (2 kantor)
+- ✅ Kelola gallery
+- ✅ Kelola FAQ
+- ✅ Inbox pesan dari contact form
+- ❌ TIDAK bisa edit landing page utama
+- ❌ TIDAK bisa kelola slider
+- ❌ TIDAK bisa kelola admin lain
+
+================================================================================
+🎯 YANG BISA DILAKUKAN:
+================================================================================
+
+1. SLIDER GAMBAR
+   - Tambah slider unlimited untuk section: Hero, About, Features, Contact
+   - Upload gambar (max 5MB, format: JPG, PNG, GIF, WEBP)
+   - Atur urutan tampilan
+   - Set link & call-to-action
+   - Aktifkan/nonaktifkan slider
+   
+   ⚠️ PENTING: Slider TIDAK ditampilkan di section Layanan
+
+2. LANDING PAGE
+   Super admin bisa edit semua teks dan angka:
+   
+   Hero Section:
+   - Judul (2 baris)
+   - Subtitle
+   - Deskripsi
+   - 3 Statistik (angka + label)
+   
+   About Section:
+   - Judul & subtitle
+   - Deskripsi
+   - Visi & Misi
+   
+   Features:
+   - Tambah/edit/hapus fitur
+   - Icon emoji
+   - Deskripsi
+   
+   Contact:
+   - Email, phone, WhatsApp
+   - Alamat
+   - Social media links
+
+3. LAYANAN
+   Admin bisa:
+   - Tambah layanan baru
+   - Edit existing
+   - Upload gambar
+   - Set harga & fitur (JSON)
+   - Featured service
+   - Atur urutan
+
+4. KANTOR (2 Kantor)
+   - Kantor Pusat Jakarta (type: head_office)
+   - Kantor Cabang Surabaya (type: branch_office)
+   
+   Bisa edit:
+   - Nama & alamat lengkap
+   - Telepon & email
+   - Koordinat (untuk Google Maps)
+   - Jam operasional (JSON)
+   - Upload foto kantor
+
+================================================================================
+🔧 TROUBLESHOOTING:
+================================================================================
+
+PROBLEM: Cannot login
+SOLUTION:
+1. Check config.php - pastikan database credentials benar
+2. Check database imported successfully
+3. Clear browser cache
+4. Try username: superadmin, password: admin123
+
+PROBLEM: Upload image failed
+SOLUTION:
+1. Check folder uploads/ permission = 755
+2. Check file size < 5MB
+3. Check format: JPG, PNG, GIF, WEBP only
+4. Check PHP upload_max_filesize setting
+
+PROBLEM: Slider tidak muncul di landing page
+SOLUTION:
+1. Check slider status = Active
+2. Check section yang dipilih
+3. Slider TIDAK ditampilkan di section Layanan
+4. Clear browser cache
+
+PROBLEM: Admin menu tidak lengkap
+SOLUTION:
+- Beberapa menu hanya untuk Super Admin:
+  * Hero Settings
+  * Slider Management  
+  * About Settings
+  * Features
+  * Contact Settings
+  * Admin Management
+  * Activity Logs
+
+================================================================================
+📞 SUPPORT:
+================================================================================
+
+Jika ada masalah atau pertanyaan:
+
+Email: info@mdn.id
+Phone: +62 812-3456-7890
+
+Dokumentasi lengkap: Lihat file README.md
+
+================================================================================
+✅ CHECKLIST INSTALASI:
+================================================================================
+
+[ ] Database dibuat dan diimport
+[ ] Config.php sudah diupdate
+[ ] Folder uploads permission 755
+[ ] Bisa login ke admin panel
+[ ] Password default sudah diganti
+[ ] Test upload slider
+[ ] Test tambah layanan
+[ ] Test edit konten landing page
+
+================================================================================
+
+Selamat menggunakan MDN Admin System! 🚀
+
+Jika instalasi berhasil, Anda akan memiliki:
+- Website landing page yang professional
+- Admin dashboard yang modern dan mudah digunakan  
+- Slider management untuk semua section (kecuali layanan)
+- Konten yang bisa dikelola sepenuhnya oleh admin
+- 2 kantor yang bisa diupdate kapan saja
+- System yang aman dan scalable
+
+Happy managing! 🎉
+
+================================================================================
